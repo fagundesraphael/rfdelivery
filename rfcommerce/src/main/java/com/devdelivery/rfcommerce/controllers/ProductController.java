@@ -1,7 +1,6 @@
 package com.devdelivery.rfcommerce.controllers;
 
 import com.devdelivery.rfcommerce.dto.ProductDTO;
-import com.devdelivery.rfcommerce.entities.Product;
 import com.devdelivery.rfcommerce.sevices.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,5 +35,10 @@ public class ProductController {
                .buildAndExpand(dto.getId()).toUri();
        return ResponseEntity.created(uri).body(dto);
 
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        dto = service.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 }
